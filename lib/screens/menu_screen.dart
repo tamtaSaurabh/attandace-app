@@ -1,26 +1,21 @@
+import 'package:attendance_app/assets/fake_users.dart';
+import 'package:attendance_app/screens/map.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:attendance_app/services/auth_services.dart';
 import 'login_screen.dart';
-import 'dart:convert';
-import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:attendance_app/utils/constants.dart';
+import 'package:attendance_app/custom/customized_tiles.dart';
 
 class MenuScreen extends StatelessWidget {
   final AuthService _authService = AuthService();
 
-  Future<List<dynamic>> loadMembers() async {
-    // Load the JSON file
-    final String response =
-        await rootBundle.loadString('lib/assets/fake_users.json');
-    final data = await json.decode(response);
-    return data['members'];
-  }
-
   @override
   Widget build(BuildContext context) {
     User? currentUser = _authService.getCurrentUser();
+    final members = MockData.getFakeMembers(); // Access mock data directly
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -68,14 +63,6 @@ class MenuScreen extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text('Locations',
-                  style: TextStyle(color: AppColors.textColor)),
-              onTap: () {
-                // Navigate to Locations Screen
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
               leading: Icon(
                 Icons.logout,
                 color: AppColors.errorColor,
@@ -90,29 +77,24 @@ class MenuScreen extends StatelessWidget {
           ],
         ),
       ),
-      body: FutureBuilder<List<dynamic>>(
-        future: loadMembers(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else {
-            final members = snapshot.data!;
-            return ListView.builder(
-              itemCount: members.length,
-              itemBuilder: (context, index) {
-                final member = members[index];
-                return ListTile(
-                  title: Text(member['name']),
-                  subtitle: Text(member['email']),
-                  onTap: () {
-                    // Handle member tap (e.g., navigate to details screen)
-                  },
-                );
-              },
-            );
-          }
+      body: ListView.builder(
+        itemCount: members.length,
+        itemBuilder: (context, index) {
+          final member = members[index];
+          return CustomizedTile(
+            name: member['name'],
+            email: member['email'],
+            onCalendarTap: () {
+              // Handle calendar icon tap
+            },
+            onLocationTap: () {
+              // Pass the member ID to MapScreen
+              Get.to(() => MapScreen(memberId: member['id']));
+            },
+            onTap: () {
+              // Handle member tap
+            },
+          );
         },
       ),
     );

@@ -4,7 +4,7 @@ import 'package:attendance_app/services/auth_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:attendance_app/screens/registration_screen.dart';
 import 'menu_screen.dart';
-import 'package:attendance_app/utils/constants.dart'; // Import the constant.dart file
+import 'package:attendance_app/utils/constants.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -99,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child:
                           Text('Login', style: TextStyle(color: Colors.white)),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.buttonColor,
+                        backgroundColor: AppColors.purple,
                         padding:
                             EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                         shape: RoundedRectangleBorder(

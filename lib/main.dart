@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'screens/menu_screen.dart';
-import 'screens/login_screen.dart'; // Import login screen
-import 'screens/registration_screen.dart'; // Import registration screen
+import 'screens/login_screen.dart';
+import 'screens/registration_screen.dart';
 
 void main() async {
-  WidgetsFlutterBinding
-      .ensureInitialized(); // Ensure Flutter bindings are initialized
-  await Firebase.initializeApp(); // Initialize Firebase
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(), // Start with the Login Screen
+      home: LoginScreen(),
     );
   }
 }
