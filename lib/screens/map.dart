@@ -5,7 +5,9 @@ import 'package:attendance_app/assets/fake_users.dart';
 class MapScreen extends StatefulWidget {
   final int memberId;
 
-  MapScreen({required this.memberId}); // Accept memberId in the constructor
+  const MapScreen(
+      {super.key,
+      required this.memberId}); // Accept memberId in the constructor
 
   @override
   _MapScreenState createState() => _MapScreenState();
@@ -50,7 +52,7 @@ class _MapScreenState extends State<MapScreen> {
       body: Column(
         children: [
           // Google Map section
-          Container(
+          SizedBox(
             height: 300, // Height of the map
             child: GoogleMap(
               onMapCreated: _onMapCreated,

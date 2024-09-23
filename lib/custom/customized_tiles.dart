@@ -9,7 +9,8 @@ class CustomizedTile extends StatelessWidget {
   final VoidCallback onTap;
 
   // Constructor for the widget to accept dynamic data and callbacks
-  CustomizedTile({
+  const CustomizedTile({
+    super.key,
     required this.name,
     required this.email,
     required this.onCalendarTap,
@@ -26,7 +27,7 @@ class CustomizedTile extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white, // White background color for each tile
           borderRadius: BorderRadius.circular(10), // Rounded corners
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Colors.black12, // Slight shadow for better visibility
               blurRadius: 6,
@@ -38,7 +39,7 @@ class CustomizedTile extends StatelessWidget {
           leading: CircleAvatar(
             radius: 20, // Size of the avatar
             backgroundColor: Colors.grey[200], // Background color of the avatar
-            child: Icon(
+            child: const Icon(
               Icons.person, // The person icon
               size: 24, // Icon size
               color: Colors.grey, // Icon color
@@ -52,13 +53,13 @@ class CustomizedTile extends StatelessWidget {
             children: [
               // Calendar Icon
               IconButton(
-                icon: Icon(Icons.calendar_today, color: Colors.grey),
+                icon: const Icon(Icons.calendar_today, color: Colors.grey),
                 onPressed: onCalendarTap, // Use the callback for calendar tap
               ),
 
               // Location Icon
               IconButton(
-                icon: Icon(Icons.location_on, color: AppColors.purple),
+                icon: const Icon(Icons.location_on, color: AppColors.purple),
                 onPressed: onLocationTap, // Use the callback for location tap
               ),
             ],

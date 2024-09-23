@@ -11,6 +11,8 @@ import 'package:attendance_app/custom/customized_tiles.dart';
 class MenuScreen extends StatelessWidget {
   final AuthService _authService = AuthService();
 
+  MenuScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     User? currentUser = _authService.getCurrentUser();
@@ -18,18 +20,21 @@ class MenuScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'ATTENDANCE',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: AppColors.background,
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
+              decoration: const BoxDecoration(
+                color: AppColors.background,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -50,12 +55,9 @@ class MenuScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              decoration: BoxDecoration(
-                color: AppColors.background,
-              ),
             ),
             ListTile(
-              title: Text('Attendance',
+              title: const Text('Attendance',
                   style: TextStyle(color: AppColors.textColor)),
               onTap: () {
                 // Navigate to Attendance Screen
@@ -63,11 +65,11 @@ class MenuScreen extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: Icon(
+              leading: const Icon(
                 Icons.logout,
                 color: AppColors.errorColor,
               ),
-              title: Text('Sign Out',
+              title: const Text('Sign Out',
                   style: TextStyle(color: AppColors.textColor)),
               onTap: () async {
                 await _authService.signOut();
